@@ -1,0 +1,24 @@
+{
+    "name": "sensorsAPI",
+    "version": "1.0.0",
+    "description": "Library use to send sensors data via API for a graphical representation",
+    "keywords": "temperature, sensors, API, REST, GUI",
+    "repository":
+    {
+      "type": "git",
+      "url": "https://github.com/sedi/sensorsAPI.git"
+    },
+    "authors":
+    [
+      {
+        "name": "Przemyslaw Siedlecki",
+        "email": "przemyslaw.siedlecki@agrobiotec.pl",
+        "url": "https://agrobiotec.pl"
+      }
+    ],
+    "license": "MIT",
+    "homepage": "https://api.agrobiotec.pl",
+    "frameworks": ["arduino"],
+    "platforms": ["espressif32"],
+    "headers": ["sensorsAPI.h"]
+  }
