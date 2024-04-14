@@ -51,11 +51,11 @@ void setup() {
 }
 
 void loop() {
-  //We need to delete task inside main thread because this the only way to release memory.
-  if (api.taskCreated != 0 && api.isRequestFinished()) {
-    api.deleteRequestTask();
-  }
   if (millis() - lastTime > conversionTime) {
+    //We need to delete task inside main thread because this the only way to release memory.
+    if (api.taskCreated != 0 && api.isRequestFinished()) {
+      api.deleteRequestTask();
+    }
     sensors.requestTemperatures();
     float temperatureC = sensors.getTempCByIndex(0);
     float temperatureF = sensors.getTempFByIndex(0);
