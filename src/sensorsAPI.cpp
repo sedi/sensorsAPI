@@ -57,8 +57,12 @@ void SensorsAPI::_sendAsyncPost(void* pvParameter) {
       if(httpResponseCode>0){
         String response = http.getString(); 
         Serial.println(response);           //Print request answer
-      } else {
+      }
+     SensorsAPIInstance-> _requestSent = true;
+    } else {
       if (WiFi.status() != WL_CONNECTED) {
+        Serial.println(WiFi.status());
+
         Serial.println("Reconnecting to WiFi...");
         WiFi.disconnect();
         WiFi.reconnect();
@@ -71,8 +75,6 @@ void SensorsAPI::_sendAsyncPost(void* pvParameter) {
         Serial.print("Connected to WiFi network with IP Address: ");
         Serial.println(WiFi.localIP());
       }
-    }
-     SensorsAPIInstance-> _requestSent = true;
     }
     //wait for the kill. Can't kill task here from here because memory will be not freed.
     delay(500);
