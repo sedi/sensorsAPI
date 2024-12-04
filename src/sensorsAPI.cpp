@@ -31,6 +31,7 @@ bool SensorsAPI::isRequestFinished() {
 void SensorsAPI::deleteRequestTask() {
   vTaskDelete(this->_t1);
   this->_requestSent = false;
+  this->taskCreated = 0;
   this->debug("Deleted send POST task");
 }
 
@@ -48,6 +49,7 @@ void SensorsAPI::_sendAsyncPost(void* pvParameter) {
       http.addHeader("x-api-key", SensorsAPIInstance->_apiKey);
 
       int startTime = millis();
+      SensorsAPIInstance->debug("Starting request...");
       int httpResponseCode = http.POST(SensorsAPIInstance->_req);
       SensorsAPIInstance->debug("Finished in:  ");
       SensorsAPIInstance->debug(String(millis() - startTime));
@@ -58,7 +60,7 @@ void SensorsAPI::_sendAsyncPost(void* pvParameter) {
         String response = http.getString(); 
         Serial.println(response);           //Print request answer
       }
-     SensorsAPIInstance-> _requestSent = true;
+     SensorsAPIInstance->_requestSent = true;
     } else {
       if (WiFi.status() != WL_CONNECTED) {
         Serial.println(WiFi.status());
@@ -85,9 +87,7 @@ int SensorsAPI::sendReadings(JsonDocument &req) {
   this->debug("\nMain task running on core ");
   this->debug(String(xPortGetCoreID()));
 
-  this->debug("Core1 time: ");
-  this->debug(String(millis()));
-
+  this->debug("Creating New task");
   String requestBody;
   serializeJson(req, requestBody);
   _req = requestBody;
@@ -103,8 +103,7 @@ int SensorsAPI::sendReadings(JsonDocument &req) {
     0
   );        /* pin task to core 0 */
   
-  this->debug("Core1 time after creating new task: ");
-  this->debug(String(millis()));
+  this->debug("Created new task");
   
   return 0;
 }
