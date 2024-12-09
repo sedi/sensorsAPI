@@ -87,6 +87,10 @@ int SensorsAPI::sendReadings(JsonDocument &req) {
   this->debug("\nMain task running on core ");
   this->debug(String(xPortGetCoreID()));
 
+  //delete old task if exists
+  //if (this->taskCreated != 0) {
+    this->deleteRequestTask();
+  //}
   this->debug("Creating New task");
   String requestBody;
   serializeJson(req, requestBody);
