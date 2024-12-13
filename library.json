@@ -1,6 +1,6 @@
 {
     "name": "sensorsAPI",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Library use to send sensors data via API for a graphical representation",
     "keywords": "temperature, sensors, API, REST, GUI",
     "repository":
