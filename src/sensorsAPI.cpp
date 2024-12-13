@@ -101,6 +101,7 @@ void SensorsAPI::_sendAsyncPost() {
 
       this->_httpSend();
       this->_availableData = false;
+      this->_requestSent = true;
     }
   }
 }
